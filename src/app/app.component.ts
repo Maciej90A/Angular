@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {UserData} from './model/UserData';
 
 @Component({
   selector: 'app-root',
@@ -7,24 +9,37 @@ import {FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  http: HttpClient;
   modelForm: any;
+  object: UserData = new UserData()
+  ;
 
-  constructor() {
+  constructor(httpClient: HttpClient) {
+    this.http = httpClient;
   }
 
   ngOnInit(): void {
     this.modelForm = new FormGroup({
-      group: new FormGroup({
+      userData: new FormGroup({
         firstName: new FormControl(),
         lastName: new FormControl(),
       }),
       age: new FormControl(),
       country: new FormControl()
     });
+    this.getFromServer();
   }
 
   // tslint:disable-next-line:typedef
   onSubmit() {
     console.log(this.modelForm.value);
+  }
+
+  // tslint:disable-next-line:typedef
+  getFromServer() {
+    this.http.get('http://jsonplaceholder.typicode.com/posts/1').subscribe(value => {
+      this.object = value as UserData;
+      console.log(value);
+    });
   }
 }
