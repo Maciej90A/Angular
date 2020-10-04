@@ -10,22 +10,16 @@ export class MyDirectiveDirective {
   }
 
   @HostListener('mouseenter')
-  // tslint:disable-next-line:typedef
   onMouseEnter() {
     this.setBgColor('yellow');
   }
 
   @HostListener('mouseleave')
-  // tslint:disable-next-line:typedef
   onMauseLeave() {
     this.setBgColor('white');
   }
 
-
-  // tslint:disable-next-line:typedef
   private setBgColor(color: string) {
     this.renderer.setStyle(this.elementRef.nativeElement, 'backgroundColor', color);
   }
-
-
 }

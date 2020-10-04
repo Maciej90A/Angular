@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UserData} from './model/UserData';
 
 @Component({
@@ -27,19 +27,29 @@ export class AppComponent implements OnInit {
       age: new FormControl(),
       country: new FormControl()
     });
-    this.getFromServer();
+    this.sendToServer();
   }
 
-  // tslint:disable-next-line:typedef
   onSubmit() {
     console.log(this.modelForm.value);
   }
 
-  // tslint:disable-next-line:typedef
   getFromServer() {
     this.http.get('http://jsonplaceholder.typicode.com/posts/1').subscribe(value => {
       this.object = value as UserData;
       console.log(value);
     });
+  }
+
+  sendToServer() {
+    const httpHeader = {
+      headers: new HttpHeaders({'Content-type': 'application/json ; charset=UTF-8'})
+    };
+    const body: UserData = {title: 'foo', body: 'bar', userId: 1} as UserData;
+    this.http.post('http://jsonplaceholder.typicode.com/posts/', body, httpHeader)
+      .subscribe(response => {
+        this.object = response as UserData;
+        console.log(response);
+      });
   }
 }
