@@ -8,6 +8,4 @@ export class MyPipePipe implements PipeTransform {
   transform(value: number, arg: number): number {
     return value % arg;
   }
-
-
 }
