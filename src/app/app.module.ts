@@ -2,9 +2,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import { MyDirectiveDirective } from './my-directive.directive';
-import { MyPipePipe } from './my-pipe.pipe';
-import {FormsModule} from '@angular/forms';
+import {MyDirectiveDirective} from './my-directive.directive';
+import {MyPipePipe} from './my-pipe.pipe';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,10 +12,11 @@ import {FormsModule} from '@angular/forms';
     MyDirectiveDirective,
     MyPipePipe,
   ],
-    imports: [
-        BrowserModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
